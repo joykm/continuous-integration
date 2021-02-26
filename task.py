@@ -4,6 +4,10 @@ def my_func():
 
 def conv_num(num_str):
 
+    # check if input is valid format
+    if num_str == '':
+        return None
+
     dec_point_found = False
     dec_len = 0
     integer = 0
