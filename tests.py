@@ -4,8 +4,8 @@ from task import conv_num
 
 class TestCase(unittest.TestCase):
 
-    # function 2 unit tests
-    def test1_func2(self):
+    # function 1 unit tests
+    def test1_func1(self):
         input = "1234"
         self.assertTrue(conv_num(input) == 1234)
 
