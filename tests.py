@@ -1,5 +1,6 @@
 import unittest
-from task import *
+from task import conv_num
+
 
 class TestCase(unittest.TestCase):
 
@@ -7,6 +8,7 @@ class TestCase(unittest.TestCase):
     def test1_func2(self):
         input = "1234"
         self.assertTrue(conv_num(input) == 1234)
+
 
 if __name__ == '__main__':
     unittest.main()
