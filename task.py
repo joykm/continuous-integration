@@ -17,7 +17,7 @@ def conv_num(num_str):
             dec_len = len(num_str) - (i + 1)
             continue
 
-        if dec_point_found == False:
+        if dec_point_found is False:
             integer = integer * 10 + ord(num_str[i]) - ord('0')
         else:
             decimal = decimal * 10 + ord(num_str[i]) - ord('0')
@@ -26,4 +26,3 @@ def conv_num(num_str):
     result = integer + decimal
 
     return result
-
