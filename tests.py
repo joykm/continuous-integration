@@ -12,14 +12,14 @@ class TestCase(unittest.TestCase):
 
     # test that a float string returns as a float
     def test2_func1(self):
-        """test that a float string returns as a float"""                                                       
+        """test that a float string returns as a float"""
         input = "1234.12"
         self.assertTrue(conv_num(input) == 1234.12)
-    
+
     # test that empty string returns None
-    def test3_func1(self):                                                                                                  
-        """test that empty string returns None"""                                                  
-        str_num = ''                                                                                                    
+    def test3_func1(self):
+        """test that empty string returns None"""
+        str_num = ''
         self.assertEqual(conv_num(str_num), None)
 
 
