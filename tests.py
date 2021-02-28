@@ -22,6 +22,12 @@ class TestCase(unittest.TestCase):
         str_num = ''
         self.assertEqual(conv_num(str_num), None)
 
+    # test that negative number returns negative number
+    def test4_func1(self):
+        """test that negative number returns negative number"""
+        str_num = "-6.50"
+        self.assertEqual(conv_num(str_num), -6.50)
+
 
 if __name__ == '__main__':
     unittest.main()
