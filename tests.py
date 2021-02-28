@@ -28,6 +28,12 @@ class TestCase(unittest.TestCase):
         str_num = "-6.50"
         self.assertEqual(conv_num(str_num), -6.50)
 
+    # test number start with "."
+    def test5_func1(self):
+        """test that number started with "." will return in proper format"""
+        str_num = ".45"
+        self.assertEqual(conv_num(str_num), 0.45)
+
 
 if __name__ == '__main__':
     unittest.main()
