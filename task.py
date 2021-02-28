@@ -50,7 +50,7 @@ def conv_num(num_str):
     return result
 
 
-""" given seconds since epoch, return 'mm-dd-yyyy' """
+# given seconds since epoch, return 'mm-dd-yyyy'
 def my_datetime(num_sec):
 
     # initiate variables
