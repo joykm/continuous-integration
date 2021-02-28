@@ -1,4 +1,5 @@
 from math import floor
+import re
 
 
 def my_func():
@@ -10,6 +11,12 @@ def conv_num(num_str):
     # check if input is valid format
     if num_str == '':
         return None
+
+    # check for any character not allow
+    regex = re.compile('[.xabcdefABCDEF0123456789-]')
+    for i in num_str:
+        if not regex.search(i):
+            return None
 
     dec_point_found = False
     dec_len = 0

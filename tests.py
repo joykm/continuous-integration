@@ -35,6 +35,12 @@ class TestCase(unittest.TestCase):
         """test that negative number returns negative number"""
         str_num = "6.-50"
         self.assertEqual(conv_num(str_num), None)
+    
+    # test for allowed character
+    def test6_func1(self):
+        """test that non allowed character found returns false"""
+        str_num = "*138.12"
+        self.assertEqual(conv_num(str_num), None)
 
     """ my_datetime() unit tests """
     # test 01-01-1970 start of day matches datetime
