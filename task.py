@@ -53,6 +53,7 @@ def my_datetime(num_sec):
 
     sec_in_day = 86400
     year = 1970
+    is_ly = False
     month = 1
     day = 1
 
@@ -66,10 +67,6 @@ def my_datetime(num_sec):
 
     # find days since epoch
     day_count = floor(num_sec / sec_in_day)
-    # print(day_count)
-
-    # determine leap years
-    is_ly = (year % 4 == 0 and year % 100 != 0) or (year % 4 == 0 and year % 400 == 0)
 
     # find year
     while (day_count > 365 and not is_ly) or (day_count > 366 and is_ly):
@@ -81,6 +78,9 @@ def my_datetime(num_sec):
             day_count -= 365
             day += 365
             year += 1
+
+        # set is_ly
+        is_ly = (year % 4 == 0 and year % 100 != 0) or (year % 4 == 0 and year % 400 == 0)
 
     prev_month_end = 1
     day = day_count + 1
