@@ -56,6 +56,23 @@ class TestCase(unittest.TestCase):
         num_sec = 68169600
         self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
 
+    # test 11-29-1973 (class example)
+    def test5_func2(self):
+        num_sec = 123456789
+        self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
+
+    # test 12-22-2282 (class example)
+    def test6_func2(self):
+        num_sec = 9876543210
+        self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
+
+    # 02-29-8360 (class example)
+    def test7_func2(self):
+        num_sec = 201653971200
+        self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
