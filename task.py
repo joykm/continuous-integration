@@ -1,5 +1,6 @@
 from math import floor
 
+
 def my_func():
     return "Hello World"
 
