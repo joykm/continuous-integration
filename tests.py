@@ -1,6 +1,7 @@
 import unittest
 from task import conv_num
-
+from task import my_datetime
+from datetime import datetime
 
 class TestCase(unittest.TestCase):
 
@@ -34,6 +35,11 @@ class TestCase(unittest.TestCase):
         str_num = "6.-50"
         self.assertEqual(conv_num(str_num), None)
 
+    """ my_datetime() unit tests """
+    # test 01-01-1970 start of day matches datetime
+    def test1_func2(self):
+        num_sec = 0
+        self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
 
 if __name__ == '__main__':
     unittest.main()
