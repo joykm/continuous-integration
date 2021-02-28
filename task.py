@@ -84,13 +84,22 @@ def my_datetime(num_sec):
 
     prev_month_end = 1
     day = day_count + 1
-    for m in ly_day_ranges:
-        if day > (ly_day_ranges[m] - prev_month_end):
-            day -= (ly_day_ranges[m] - prev_month_end)
-        else:
-            month = m
-            break
-        prev_month_end = ly_day_ranges[m]
+    if is_ly:
+        for m in ly_day_ranges:
+            if day > (ly_day_ranges[m] - prev_month_end):
+                day -= (ly_day_ranges[m] - prev_month_end)
+            else:
+                month = m
+                break
+            prev_month_end = ly_day_ranges[m]
+    else:
+        for m in non_ly_day_ranges:
+            if day > (non_ly_day_ranges[m] - prev_month_end):
+                day -= (non_ly_day_ranges[m] - prev_month_end)
+            else:
+                month = m
+                break
+            prev_month_end = non_ly_day_ranges[m]
 
     # zero fill day if needed
     day_str = str(day)

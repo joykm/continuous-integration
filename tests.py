@@ -43,8 +43,14 @@ class TestCase(unittest.TestCase):
 
     # test 01-01-1970 end of day matches datetime
     def test2_func2(self):
-        num_sec = 86399 
+        num_sec = 86399
         self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
+
+    # test 03-01-1970 start of day matches datetime
+    def test3_func2(self):
+        num_sec = 5097600
+        self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
+
 
 if __name__ == '__main__':
     unittest.main()
