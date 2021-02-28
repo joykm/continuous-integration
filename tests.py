@@ -40,5 +40,6 @@ class TestCase(unittest.TestCase):
         str_num = "*138.12"
         self.assertEqual(conv_num(str_num), None)
 
+
 if __name__ == '__main__':
     unittest.main()
