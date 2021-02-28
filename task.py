@@ -112,6 +112,6 @@ def my_datetime(num_sec):
         month_str = month_str.zfill(2)
 
     date = month_str + "-" + day_str + "-" + str(year)
-    # print(date)
+    print(date)
 
     return date
