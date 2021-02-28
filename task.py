@@ -17,13 +17,14 @@ def conv_num(num_str):
     # check if input is a negative value
     # replace "-" with "" (empty character)
     is_negative = False
-    for i in num_str:
-        if i == "-":
-            num_str = num_str.replace('-', "")
-            is_negative = True
+    if num_str[0] == "-":
+        num_str = num_str.replace('-', "")
+        is_negative = True
 
     for i in range(len(num_str)):
 
+        if num_str[0] == "-":
+            is_negative = True
         if num_str[i] == ".":
             dec_point_found = True
             dec_len = len(num_str) - (i + 1)
