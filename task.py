@@ -50,8 +50,10 @@ def conv_num(num_str):
     return result
 
 
+""" given seconds since epoch, return 'mm-dd-yyyy' """
 def my_datetime(num_sec):
 
+    # initiate variables
     sec_in_day = 86400
     year = 1970
     is_ly = False
@@ -83,6 +85,8 @@ def my_datetime(num_sec):
         # set is_ly
         is_ly = (year % 4 == 0 and year % 100 != 0) or (year % 4 == 0 and year % 400 == 0)
 
+    # determine if we are in a leap year, and find month we are in given days into year. Add
+    # 1 to day count because if we have 58 full days we are in the 59th day of the year.
     prev_month_end = 1
     day = day_count + 1
     if is_ly:
@@ -112,7 +116,7 @@ def my_datetime(num_sec):
     if len(month_str) < 2:
         month_str = month_str.zfill(2)
 
+    # format date string
     date = month_str + "-" + day_str + "-" + str(year)
-    print(date)
 
     return date
