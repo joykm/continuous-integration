@@ -23,6 +23,10 @@ def conv_num(num_str):
 
     for i in range(len(num_str)):
 
+        # Determine if "-" is somewhere else, return None
+        if num_str[i] == "-":
+            return None
+
         if num_str[i] == ".":
             dec_point_found = True
             dec_len = len(num_str) - (i + 1)
