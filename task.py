@@ -127,3 +127,7 @@ def my_datetime(num_sec):
     date = month_str + "-" + day_str + "-" + str(year)
 
     return date
+
+def conv_endian(num, endian='big'):
+    hex_str = ""
+    return hex_str
