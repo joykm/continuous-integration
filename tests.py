@@ -42,39 +42,45 @@ class TestCase(unittest.TestCase):
         str_num = "*138.12"
         self.assertEqual(conv_num(str_num), None)
 
-    """ my_datetime() unit tests """
     # test 01-01-1970 start of day matches datetime
     def test1_func2(self):
+        """test 01-01-1970 start of day matches datetime"""
         num_sec = 0
         self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
 
     # test 01-01-1970 end of day matches datetime
     def test2_func2(self):
+        """test 01-01-1970 end of day matches datetime"""
         num_sec = 86399
         self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
 
     # test 03-01-1970 start of day matches datetime
     def test3_func2(self):
+        """test 03-01-1970 start of day matches datetime"""
         num_sec = 5097600
         self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
 
     # test 02-29-1972 start of day matches datetime
     def test4_func2(self):
+        """test 02-29-1972 start of day matches datetime"""
         num_sec = 68169600
         self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
 
     # test 11-29-1973 (class example)
     def test5_func2(self):
+        """test 11-29-1973 (class example)"""
         num_sec = 123456789
         self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
 
     # test 12-22-2282 (class example)
     def test6_func2(self):
+        """test 12-22-2282 (class example)"""
         num_sec = 9876543210
         self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
 
     # 02-29-8360 (class example)
     def test7_func2(self):
+        """02-29-8360 (class example)"""
         num_sec = 201653971200
         self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
 
