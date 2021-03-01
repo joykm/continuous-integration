@@ -128,6 +128,41 @@ def my_datetime(num_sec):
 
     return date
 
-def conv_endian(num, endian='big'):
-    hex_str = ""
-    return hex_str
+# Function 3
+def conv_endian(num, endian="big"):
+    # map to assist with conversion
+    hex_map = {
+        0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7',
+        8: '8', 9: '9', 10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F'
+    }
+
+    # list to contain chars of converted numbers
+    bytes = []
+
+    # check if we have are on the first half of the byte from left to right
+    left_half = False
+    # the current byte
+    prev = ""
+
+    # each hex place is 0 to 15
+    # if last digit is smaller than 16 we break out of the loop
+    while not num/16 == 0:
+        curr = hex_map[num % 16]
+        # when we have the full byte we append to the list
+        if left_half:
+            bytes.append(curr + prev)
+            left_half = False
+        # if we only have the first byte we save it for later
+        else:
+            prev = curr
+            left_half = True
+        # divide to continue to next digit
+        num = floor(num / 16)
+    # if the loop quit early append zero to the right_half
+    if left_half:
+        bytes.append("0" + prev)
+
+    # default output is little endian
+    if endian != "little":
+        bytes = bytes[::-1]
+    return " ".join(bytes)
