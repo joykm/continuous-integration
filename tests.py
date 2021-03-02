@@ -1,5 +1,6 @@
 import unittest
 from task import conv_num
+from task import conv_endian
 from task import my_datetime
 from datetime import datetime
 
@@ -83,6 +84,11 @@ class TestCase(unittest.TestCase):
         """02-29-8360 (class example)"""
         num_sec = 201653971200
         self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
+
+    def test1_func3(self):
+        """Should be 0E 91 A2 (class example)"""
+        # fix this when the function is working
+        self.assertEqual(conv_endian(954786, 'big'), '0E 91 A2')
 
 
 if __name__ == '__main__':
