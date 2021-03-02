@@ -49,6 +49,12 @@ class TestCase(unittest.TestCase):
         str_num = "0xA0x"
         self.assertEqual(conv_num(str_num), None)
 
+    # test for repeat '0X' in hexadecimal input string
+    def test8_func1(self):
+        """repeated 0X in hexadecimal returns None"""
+        str_num = "0XA0X"
+        self.assertEqual(conv_num(str_num), None)
+
     # test 01-01-1970 start of day matches datetime
     def test1_func2(self):
         """test 01-01-1970 start of day matches datetime"""
