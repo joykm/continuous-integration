@@ -31,6 +31,13 @@ def conv_num(num_str):
         num_str = num_str.replace('-', "")
         is_negative = True
 
+    # if string start with 0x or 0X
+    # do hexadecimal convert to decimal
+    if num_str.startswith(('0x', '0X',)):
+        # check for the repeat of 0x or 0X
+        if num_str.count('0x') > 1 or num_str.count('0X') > 1:
+            return None
+
     for i in range(len(num_str)):
 
         # Determine if "-" is somewhere else, return None
