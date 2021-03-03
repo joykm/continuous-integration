@@ -67,6 +67,12 @@ class TestCase(unittest.TestCase):
         str_num = "-0xAD4"
         self.assertEqual(conv_num(str_num), -2772)
 
+    # test for hexadecimal conversion with unexpected character
+    def test11_func1(self):
+        """hexadecimal 0xAG5 has 'G' which is not Hexadecimal symbol returns None"""
+        str_num = "0xAG5"
+        self.assertEqual(conv_num(str_num), None)
+
     # test 01-01-1970 start of day matches datetime
     def test1_func2(self):
         """test 01-01-1970 start of day matches datetime"""
