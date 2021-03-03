@@ -12,6 +12,11 @@ def conv_num(num_str):
     if num_str == '':
         return None
 
+    # check for repeat key characters
+    if num_str.count('0X') > 1 or num_str.count('0x') > 1 or \
+            num_str.count('-') > 1 or num_str.count('.') > 1:
+        return None
+
     dec_point_found = False
     dec_len = 0
     integer = 0
@@ -64,11 +69,12 @@ def conv_num(num_str):
             result = result * (-1)
 
     else:
-        # check for any character not allow
-        regex = re.compile('[.0123456789-]')
+        # convert decimal string to decimal
+        char_allowed = re.compile('[.0123456789-]')
 
         for i in range(len(num_str)):
-            if not regex.search(num_str[i]):
+            # check for any character not allow
+            if not char_allowed.search(num_str[i]):
                 return None
 
             # Determine if "-" is somewhere else, return None
