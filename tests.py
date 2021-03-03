@@ -61,6 +61,12 @@ class TestCase(unittest.TestCase):
         str_num = "0xAD4"
         self.assertEqual(conv_num(str_num), 2772)
 
+    # test for hexadecimal conversion with negative input string
+    def test10_func1(self):
+        """test -0xAD4  should return decimal -2772"""
+        str_num = "-0xAD4"
+        self.assertEqual(conv_num(str_num), -2772)
+
     # test 01-01-1970 start of day matches datetime
     def test1_func2(self):
         """test 01-01-1970 start of day matches datetime"""
