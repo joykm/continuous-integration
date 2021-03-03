@@ -2,39 +2,67 @@ from math import floor
 import re
 
 
-def my_func():
-    return "Hello World"
-
-
-def conv_num(num_str):
-
-    # check if input is valid format
+# helper function for conv_num()
+def is_string_valid(num_str):
+    string_valid = True
+    # check if input is empty
     if num_str == '':
-        return None
+        string_valid = False
 
-    # check for any character not allow
-    regex = re.compile('[.xabcdefABCDEF0123456789-]')
-    for i in num_str:
-        if not regex.search(i):
+    # check for repeat the key characters
+    if num_str.count('0X') > 1 or num_str.count('0x') > 1 or \
+            num_str.count('-') > 1 or num_str.count('.') > 1:
+        string_valid = False
+
+    return string_valid
+
+
+# helper function for function 'conv_num()'
+# function take valid input string and return decimal
+def hexadecimal_to_decimal(num_str):
+    # convert to uppercase
+    new_str = num_str.upper()
+    # strip '0X' out
+    stripped_num_str = new_str.replace('0X', "")
+
+    # Create a conversion table
+    conversion_table = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
+                        '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
+                        'A': 10, 'B': 11, 'C': 12, 'D': 13,
+                        'E': 14, 'F': 15}
+
+    # get exponential degree
+    exp_degree = len(stripped_num_str) - 1
+
+    # iterate through each character to lookup 'conversion_table'
+    # adding results for each character
+    # return None if not in conversion map
+    # decrement of exponential degree
+    result = 0
+    for c in stripped_num_str:
+        try:
+            result += conversion_table[c] * (16 ** exp_degree)
+            exp_degree -= 1
+        except KeyError:
             return None
+    return result
 
+
+# helper function for function 'conv_num()'
+# function take valid string input and return decimal
+def number_to_decimal(num_str):
+    # convert decimal string to decimal
+    # initialize variables
     dec_point_found = False
     dec_len = 0
     integer = 0
     decimal = 0
-    result = 0
-
-    # check if input is a negative value
-    # replace "-" with "" (empty character)
-    is_negative = False
-    if num_str[0] == "-":
-        num_str = num_str.replace('-', "")
-        is_negative = True
+    char_allowed = re.compile('[.0123456789]')
 
     for i in range(len(num_str)):
 
-        # Determine if "-" is somewhere else, return None
-        if num_str[i] == "-":
+        # check for any character not allow
+        if not char_allowed.search(num_str[i]):
             return None
 
         if num_str[i] == ".":
@@ -48,11 +76,36 @@ def conv_num(num_str):
             decimal = decimal * 10 + ord(num_str[i]) - ord('0')
 
     decimal = decimal / (10 ** dec_len)
+    result = integer + decimal
+
+    return result
+
+
+def conv_num(num_str):
+
+    # check for initial validation
+    if is_string_valid(num_str) is False:
+        return None
+
+    result = 0
+    is_negative = False
+
+    # check if input is a negative value
+    # strip input and replace "-" with "" (empty character)
+    if num_str[0] == "-":
+        num_str = num_str.replace('-', "")
+        is_negative = True
+
+    # if string start with 0x or 0X
+    # Start hexadecimal convert to decimal
+    if num_str.startswith(('0x', '0X',)):
+        result = hexadecimal_to_decimal(num_str)
+
+    else:
+        result = number_to_decimal(num_str)
 
     if is_negative:
-        result = (integer + decimal) * (-1)
-    else:
-        result = integer + decimal
+        return result * (-1)
 
     return result
 
@@ -90,10 +143,12 @@ def my_datetime(num_sec):
             year += 1
 
         # set is_ly
-        is_ly = (year % 4 == 0 and year % 100 != 0) or (year % 4 == 0 and year % 400 == 0)
+        is_ly = (year % 4 == 0 and year % 100 != 0) or \
+                (year % 4 == 0 and year % 400 == 0)
 
-    # determine if we are in a leap year, and find month we are in given days into year. Add
-    # 1 to day count because if we have 58 full days we are in the 59th day of the year.
+    # determine if we are in a leap year, and find month
+    # we are in given days into year. Add 1 to day count
+    # because if we have 58 full days we are in the 59th day of the year.
     prev_month_end = 1
     day = day_count + 1
     if is_ly:

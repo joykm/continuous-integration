@@ -43,6 +43,60 @@ class TestCase(unittest.TestCase):
         str_num = "*138.12"
         self.assertEqual(conv_num(str_num), None)
 
+    # test for repeat '0x' in hexadecimal input string
+    def test7_func1(self):
+        """repeated 0x in hexadecimal returns None"""
+        str_num = "0xA0x"
+        self.assertEqual(conv_num(str_num), None)
+
+    # test for repeat '0X' in hexadecimal input string
+    def test8_func1(self):
+        """repeated 0X in hexadecimal returns None"""
+        str_num = "0XA0X"
+        self.assertEqual(conv_num(str_num), None)
+
+    # test for hexadecimal conversion
+    def test9_func1(self):
+        """test 0xAD4  should return decimal 2772"""
+        str_num = "0xAD4"
+        self.assertEqual(conv_num(str_num), 2772)
+
+    # test for hexadecimal conversion with negative input string
+    def test10_func1(self):
+        """test -0xAD4  should return decimal -2772"""
+        str_num = "-0xAD4"
+        self.assertEqual(conv_num(str_num), -2772)
+
+    # test for hexadecimal conversion with unexpected character
+    def test11_func1(self):
+        """hexadecimal 0xAG5 has 'G' which is not Hexadecimal symbol returns None"""
+        str_num = "0xAG5"
+        self.assertEqual(conv_num(str_num), None)
+
+    # test for hexadecimal conversion
+    def test12_func1(self):
+        """test 0XAD5  should return decimal 2772"""
+        str_num = "0XAD4"
+        self.assertEqual(conv_num(str_num), 2772)
+
+    # test for hexadecimal conversion with unexpected character
+    def test13_func1(self):
+        """hexadecimal 0xAX5 has 'G' which is not Hexadecimal letter returns None"""
+        str_num = "0xAX5"
+        self.assertEqual(conv_num(str_num), None)
+
+    # test for mixed decimal and hexadecimal string input
+    def test14_func1(self):
+        """mixed number and letter that not start with 0x or 0X return None"""
+        str_num = "126A"
+        self.assertEqual(conv_num(str_num), None)
+
+    # test for repeat '.' in input string
+    def test15_func1(self):
+        """input string repeat '.' returns None"""
+        str_num = "12.2.3"
+        self.assertEqual(conv_num(str_num), None)
+
     # test 01-01-1970 start of day matches datetime
     def test1_func2(self):
         """test 01-01-1970 start of day matches datetime"""
