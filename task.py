@@ -35,20 +35,16 @@ def conv_num(num_str):
     # Start hexadecimal convert to decimal
     if num_str.startswith(('0x', '0X',)):
 
-        # strip '0x' or '0X' out before the conversion
-        stripped_num_str = None
-        if '0x' in num_str:
-            stripped_num_str = num_str.replace('0x', "")
-
-        elif '0X' in num_str:
-            stripped_num_str = num_str.replace('0X', "")
+        # convert to uppercase
+        new_str = num_str.upper()
+        # strip '0X' out
+        stripped_num_str = new_str.replace('0X', "")
 
         # Create a conversion table
         conversion_table = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
                             '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
                             'A': 10, 'B': 11, 'C': 12, 'D': 13,
-                            'E': 14, 'F': 15, 'a': 10, 'b': 11,
-                            'c': 12, 'd': 13, 'e': 14, 'f': 15}
+                            'E': 14, 'F': 15}
 
         # get exponential degree
         exp_degree = len(stripped_num_str) - 1
@@ -63,10 +59,6 @@ def conv_num(num_str):
                 exp_degree -= 1
             except KeyError:
                 return None
-
-        # check for negative string input returns negative value
-        if is_negative:
-            result = result * (-1)
 
     else:
         # convert decimal string to decimal
@@ -94,11 +86,10 @@ def conv_num(num_str):
                 decimal = decimal * 10 + ord(num_str[i]) - ord('0')
 
         decimal = decimal / (10 ** dec_len)
+        result = integer + decimal
 
-        if is_negative:
-            result = (integer + decimal) * (-1)
-        else:
-            result = integer + decimal
+    if is_negative:
+        return result * (-1)
 
     return result
 
