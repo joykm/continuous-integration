@@ -7,6 +7,7 @@ from datetime import datetime
 
 class TestCase(unittest.TestCase):
 
+    # Function 1
     # test that an integer string returns as an integer
     def test1_func1(self):
         """test that an integer string returns as an integer"""
@@ -97,6 +98,7 @@ class TestCase(unittest.TestCase):
         str_num = "12.2.3"
         self.assertEqual(conv_num(str_num), None)
 
+    # Function 2
     # test 01-01-1970 start of day matches datetime
     def test1_func2(self):
         """test 01-01-1970 start of day matches datetime"""
@@ -139,10 +141,16 @@ class TestCase(unittest.TestCase):
         num_sec = 201653971200
         self.assertEqual(my_datetime(num_sec), datetime.utcfromtimestamp(num_sec).strftime("%m-%d-%Y"))
 
+    # Fuction 3
+    # Should be 0E 91 A2 (class example)
     def test1_func3(self):
-        """Should be 0E 91 A2 (class example)"""
+        """Expected result is 0E 91 A2 (class example)"""
         # fix this when the function is working
         self.assertEqual(conv_endian(954786, 'big'), '0E 91 A2')
+
+    def test2_func3(self):
+        """Test for negative number handling. Expected -0E 91 A2 (class example)"""
+        self.assertEqual(conv_endian(-954786), '-0E 91 A2')
 
 
 if __name__ == '__main__':
