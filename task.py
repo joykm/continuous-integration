@@ -8,11 +8,6 @@ def conv_num(num_str):
     if num_str == '':
         return None
 
-    # check for repeat the key characters
-    if num_str.count('0X') > 1 or num_str.count('0x') > 1 or \
-            num_str.count('-') > 1 or num_str.count('.') > 1:
-        return None
-
     result = 0
     is_negative = False
 
@@ -25,6 +20,9 @@ def conv_num(num_str):
     # if string start with 0x or 0X
     # Start hexadecimal convert to decimal
     if num_str.startswith(('0x', '0X',)):
+        # check for repeat '0x' and '0X'
+        if num_str.count('0x') > 1 or num_str.count('0X') > 1:
+            return None
 
         # strip '0x' or '0X' out before the conversion
         stripped_num_str = None
@@ -67,6 +65,10 @@ def conv_num(num_str):
         integer = 0
         decimal = 0
         char_allowed = re.compile('[.0123456789-]')
+
+        # check for repeat the key characters
+        if num_str.count('-') > 1 or num_str.count('.') > 1:
+            return None
 
         for i in range(len(num_str)):
 
@@ -209,3 +211,5 @@ def conv_endian(num, endian="big"):
     if endian != "little":
         bytes = bytes[::-1]
     return " ".join(bytes)
+
+conv_num("0X0X")
