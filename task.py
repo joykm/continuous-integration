@@ -8,15 +8,9 @@ def my_func():
 
 def conv_num(num_str):
 
-    # check if input is valid format
+    # check if input is empty
     if num_str == '':
         return None
-
-    # check for any character not allow
-    regex = re.compile('[.xXabcdefABCDEF0123456789-]')
-    for i in num_str:
-        if not regex.search(i):
-            return None
 
     dec_point_found = False
     dec_len = 0
@@ -70,7 +64,12 @@ def conv_num(num_str):
             result = result * (-1)
 
     else:
+        # check for any character not allow
+        regex = re.compile('[.0123456789-]')
+
         for i in range(len(num_str)):
+            if not regex.search(num_str[i]):
+                return None
 
             # Determine if "-" is somewhere else, return None
             if num_str[i] == "-":
