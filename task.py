@@ -2,10 +2,24 @@ from math import floor
 import re
 
 
-def conv_num(num_str):
-
+def is_string_valid(num_str):
+    string_valid = True
     # check if input is empty
     if num_str == '':
+        string_valid = False
+
+    # check for repeat the key characters
+    if num_str.count('0X') > 1 or num_str.count('0x') > 1 or \
+            num_str.count('-') > 1 or num_str.count('.') > 1:
+        string_valid = False
+
+    return string_valid
+
+
+def conv_num(num_str):
+
+    # check for initial validation
+    if is_string_valid(num_str) is False:
         return None
 
     result = 0
@@ -20,9 +34,6 @@ def conv_num(num_str):
     # if string start with 0x or 0X
     # Start hexadecimal convert to decimal
     if num_str.startswith(('0x', '0X',)):
-        # check for repeat '0x' and '0X'
-        if num_str.count('0x') > 1 or num_str.count('0X') > 1:
-            return None
 
         # strip '0x' or '0X' out before the conversion
         stripped_num_str = None
@@ -64,20 +75,12 @@ def conv_num(num_str):
         dec_len = 0
         integer = 0
         decimal = 0
-        char_allowed = re.compile('[.0123456789-]')
-
-        # check for repeat the key characters
-        if num_str.count('-') > 1 or num_str.count('.') > 1:
-            return None
+        char_allowed = re.compile('[.0123456789]')
 
         for i in range(len(num_str)):
 
             # check for any character not allow
             if not char_allowed.search(num_str[i]):
-                return None
-
-            # Determine if "-" is somewhere else, return None
-            if num_str[i] == "-":
                 return None
 
             if num_str[i] == ".":
@@ -91,10 +94,11 @@ def conv_num(num_str):
                 decimal = decimal * 10 + ord(num_str[i]) - ord('0')
 
         decimal = decimal / (10 ** dec_len)
-        result = integer + decimal
 
         if is_negative:
-            result = result * (-1)
+            result = (integer + decimal) * (-1)
+        else:
+            result = integer + decimal
 
     return result
 
@@ -211,5 +215,3 @@ def conv_endian(num, endian="big"):
     if endian != "little":
         bytes = bytes[::-1]
     return " ".join(bytes)
-
-conv_num("0X0X")
