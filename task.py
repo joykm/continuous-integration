@@ -59,8 +59,11 @@ def conv_num(num_str):
         # adding results for each character
         # decrement of exponential degree
         for c in num_str:
-            result += conversion_table[c] * (16 ** exp_degree)
-            exp_degree -= 1
+            try:
+                result += conversion_table[c] * (16 ** exp_degree)
+                exp_degree -= 1
+            except KeyError:
+                return None
 
         # check for negative string input returns negative value
         if is_negative:
