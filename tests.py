@@ -85,6 +85,12 @@ class TestCase(unittest.TestCase):
         str_num = "0xAX5"
         self.assertEqual(conv_num(str_num), None)
 
+    # test for mixed decimal and hexadecimal string input
+    def test14_func1(self):
+        """mixed number and letter that not start with 0x or 0X return None"""
+        str_num = "126A"
+        self.assertEqual(conv_num(str_num), None)
+
     # test 01-01-1970 start of day matches datetime
     def test1_func2(self):
         """test 01-01-1970 start of day matches datetime"""
