@@ -192,6 +192,12 @@ def conv_endian(num, endian="big"):
         8: '8', 9: '9', 10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F'
     }
 
+    # check for negative argument
+    is_negative = num < 0
+    # remove negativity before processing
+    if is_negative:
+        num *= -1
+
     # list to contain chars of converted numbers
     bytes = []
 
@@ -221,4 +227,8 @@ def conv_endian(num, endian="big"):
     # default output is little endian
     if endian != "little":
         bytes = bytes[::-1]
-    return " ".join(bytes)
+
+    result = " ".join(bytes)
+    if is_negative:
+        result = '-' + result
+    return result
