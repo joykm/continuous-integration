@@ -13,7 +13,7 @@ def conv_num(num_str):
         return None
 
     # check for any character not allow
-    regex = re.compile('[.xabcdefABCDEF0123456789-]')
+    regex = re.compile('[.xXabcdefABCDEF0123456789-]')
     for i in num_str:
         if not regex.search(i):
             return None
