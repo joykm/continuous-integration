@@ -91,6 +91,12 @@ class TestCase(unittest.TestCase):
         str_num = "126A"
         self.assertEqual(conv_num(str_num), None)
 
+    # test for repeat '.' in input string
+    def test15_func1(self):
+        """input string repeat '.' returns None"""
+        str_num = "12.2.3"
+        self.assertEqual(conv_num(str_num), None)
+
     # test 01-01-1970 start of day matches datetime
     def test1_func2(self):
         """test 01-01-1970 start of day matches datetime"""
