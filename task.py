@@ -37,29 +37,58 @@ def conv_num(num_str):
         # check for the repeat of 0x or 0X
         if num_str.count('0x') > 1 or num_str.count('0X') > 1:
             return None
-
-    for i in range(len(num_str)):
-
-        # Determine if "-" is somewhere else, return None
-        if num_str[i] == "-":
-            return None
-
-        if num_str[i] == ".":
-            dec_point_found = True
-            dec_len = len(num_str) - (i + 1)
-            continue
-
-        if dec_point_found is False:
-            integer = integer * 10 + ord(num_str[i]) - ord('0')
         else:
-            decimal = decimal * 10 + ord(num_str[i]) - ord('0')
+            # strip '0x' or '0X' out before the conversion
+            if '0x' in num_str:
+                num_str = num_str.replace('0x', "")
 
-    decimal = decimal / (10 ** dec_len)
+            elif '0X' in num_str:
+                num_str = num_str.replace('0X', "")
 
-    if is_negative:
-        result = (integer + decimal) * (-1)
+        # start the conversion
+        # Create a conversion table
+        conversion_table = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
+                            '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
+                            'A': 10, 'B': 11, 'C': 12, 'D': 13,
+                            'E': 14, 'F': 15, 'a': 10, 'b': 11, 'c': 12, 'd': 13,
+                            'e': 14, 'f': 15}
+        # get exponential degree
+        exp_degree = len(num_str) - 1
+
+        # iterate through each character to lookup 'conversion_table'
+        # adding results for each character
+        # decrement of exponential degree
+        for c in num_str:
+            result += conversion_table[c] * (16 ** exp_degree)
+            exp_degree -= 1
+
+        # check for negative string input returns negative value
+        if is_negative:
+            result = result * (-1)
+
     else:
-        result = integer + decimal
+        for i in range(len(num_str)):
+
+            # Determine if "-" is somewhere else, return None
+            if num_str[i] == "-":
+                return None
+
+            if num_str[i] == ".":
+                dec_point_found = True
+                dec_len = len(num_str) - (i + 1)
+                continue
+
+            if dec_point_found is False:
+                integer = integer * 10 + ord(num_str[i]) - ord('0')
+            else:
+                decimal = decimal * 10 + ord(num_str[i]) - ord('0')
+
+        decimal = decimal / (10 ** dec_len)
+
+        if is_negative:
+            result = (integer + decimal) * (-1)
+        else:
+            result = integer + decimal
 
     return result
 
