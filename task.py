@@ -2,62 +2,53 @@ from math import floor
 import re
 
 
-def my_func():
-    return "Hello World"
-
-
 def conv_num(num_str):
 
     # check if input is empty
     if num_str == '':
         return None
 
-    # check for repeat key characters
+    # check for repeat the key characters
     if num_str.count('0X') > 1 or num_str.count('0x') > 1 or \
             num_str.count('-') > 1 or num_str.count('.') > 1:
         return None
 
-    dec_point_found = False
-    dec_len = 0
-    integer = 0
-    decimal = 0
     result = 0
+    is_negative = False
 
     # check if input is a negative value
-    # replace "-" with "" (empty character)
-    is_negative = False
+    # strip input and replace "-" with "" (empty character)
     if num_str[0] == "-":
         num_str = num_str.replace('-', "")
         is_negative = True
 
     # if string start with 0x or 0X
-    # do hexadecimal convert to decimal
+    # Start hexadecimal convert to decimal
     if num_str.startswith(('0x', '0X',)):
-        # check for the repeat of 0x or 0X
-        if num_str.count('0x') > 1 or num_str.count('0X') > 1:
-            return None
-        else:
-            # strip '0x' or '0X' out before the conversion
-            if '0x' in num_str:
-                num_str = num_str.replace('0x', "")
 
-            elif '0X' in num_str:
-                num_str = num_str.replace('0X', "")
+        # strip '0x' or '0X' out before the conversion
+        stripped_num_str = None
+        if '0x' in num_str:
+            stripped_num_str = num_str.replace('0x', "")
 
-        # start the conversion
+        elif '0X' in num_str:
+            stripped_num_str = num_str.replace('0X', "")
+
         # Create a conversion table
         conversion_table = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
                             '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
                             'A': 10, 'B': 11, 'C': 12, 'D': 13,
                             'E': 14, 'F': 15, 'a': 10, 'b': 11,
                             'c': 12, 'd': 13, 'e': 14, 'f': 15}
+
         # get exponential degree
-        exp_degree = len(num_str) - 1
+        exp_degree = len(stripped_num_str) - 1
 
         # iterate through each character to lookup 'conversion_table'
         # adding results for each character
+        # return None if not in conversion map
         # decrement of exponential degree
-        for c in num_str:
+        for c in stripped_num_str:
             try:
                 result += conversion_table[c] * (16 ** exp_degree)
                 exp_degree -= 1
@@ -70,9 +61,15 @@ def conv_num(num_str):
 
     else:
         # convert decimal string to decimal
+        # initialize variables
+        dec_point_found = False
+        dec_len = 0
+        integer = 0
+        decimal = 0
         char_allowed = re.compile('[.0123456789-]')
 
         for i in range(len(num_str)):
+
             # check for any character not allow
             if not char_allowed.search(num_str[i]):
                 return None
@@ -92,11 +89,10 @@ def conv_num(num_str):
                 decimal = decimal * 10 + ord(num_str[i]) - ord('0')
 
         decimal = decimal / (10 ** dec_len)
+        result = integer + decimal
 
         if is_negative:
-            result = (integer + decimal) * (-1)
-        else:
-            result = integer + decimal
+            result = result * (-1)
 
     return result
 
