@@ -49,8 +49,8 @@ def conv_num(num_str):
         conversion_table = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
                             '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
                             'A': 10, 'B': 11, 'C': 12, 'D': 13,
-                            'E': 14, 'F': 15, 'a': 10, 'b': 11, 'c': 12, 'd': 13,
-                            'e': 14, 'f': 15}
+                            'E': 14, 'F': 15, 'a': 10, 'b': 11,
+                            'c': 12, 'd': 13, 'e': 14, 'f': 15}
         # get exponential degree
         exp_degree = len(num_str) - 1
 
@@ -134,10 +134,12 @@ def my_datetime(num_sec):
             year += 1
 
         # set is_ly
-        is_ly = (year % 4 == 0 and year % 100 != 0) or (year % 4 == 0 and year % 400 == 0)
+        is_ly = (year % 4 == 0 and year % 100 != 0) or \
+                (year % 4 == 0 and year % 400 == 0)
 
-    # determine if we are in a leap year, and find month we are in given days into year. Add
-    # 1 to day count because if we have 58 full days we are in the 59th day of the year.
+    # determine if we are in a leap year, and find month
+    # we are in given days into year. Add 1 to day count
+    # because if we have 58 full days we are in the 59th day of the year.
     prev_month_end = 1
     day = day_count + 1
     if is_ly:
