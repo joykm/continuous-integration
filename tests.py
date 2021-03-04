@@ -156,13 +156,17 @@ class TestCase(unittest.TestCase):
         """Test for little endian. Expected: A2 91 0E (class example)"""
         self.assertEqual(conv_endian(954786, 'little'), 'A2 91 0E')
 
-    def test4_func4(self):
+    def test4_func3(self):
         """Test for negative little endian. Expected: -A2 91 0E (class example)"""
         self.assertEqual(conv_endian(-954786, 'little'), '-A2 91 0E')
 
-    def test5_func5(self):
+    def test5_func3(self):
         """Test that explicit parameter invocations are accepted (class example)"""
         self.assertEqual(conv_endian(num=-954786, endian='little'), '-A2 91 0E')
+
+    def test6_func3(self):
+        """Test that invalid second parameter returns None (class example)"""
+        self.assertEqual(conv_endian(num=-955786, endian='small'), None)
 
 
 if __name__ == '__main__':
