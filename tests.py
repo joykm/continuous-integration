@@ -152,6 +152,10 @@ class TestCase(unittest.TestCase):
         """Test for negative number handling. Expected -0E 91 A2 (class example)"""
         self.assertEqual(conv_endian(-954786), '-0E 91 A2')
 
+    def test3_func3(self):
+        """Test for little endian: Expected: A2 91 0E (class example)"""
+        self.assertEqual(conv_endian(954786, 'little'), 'A2 91 0E')
+
 
 if __name__ == '__main__':
     unittest.main()
