@@ -186,6 +186,10 @@ def my_datetime(num_sec):
 
 # Function 3
 def conv_endian(num, endian="big"):
+    # Reject invalid endian values
+    if endian != 'big' and endian != 'little':
+        return None
+
     # map to assist with conversion
     hex_map = {
         0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7',
